@@ -60,3 +60,27 @@ npm test
 ---
 
 ## Project Structure
+
+src/
+├── commands/
+│ └── ask.command.ts # CLI command definition
+├── services/
+│ └── kb.service.ts # API logic
+├── tests/
+│ └── kb.test.ts # Unit tests
+└── cli.ts # Entry point
+
+## Scripts
+
+```json
+"scripts": {
+  "dev": "ts-node src/cli.ts",
+  "test": "vitest run"
+}
+```
+
+---
+
+## Author
+
+Trường
