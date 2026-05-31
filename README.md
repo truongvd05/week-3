@@ -30,7 +30,7 @@ A simple CLI tool for querying a Knowledge Base API, built with Node.js and Type
 ## Installation
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/truongvd05/week-3
 cd week-3
 npm install
 ```
