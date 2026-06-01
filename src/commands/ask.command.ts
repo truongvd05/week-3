@@ -7,6 +7,7 @@ export const askCommand = (program: Command) => {
     .command("ask")
     .argument("<question>")
     .option("-v, --verbose", "Show full response details")
+    .option("--json", "Output raw JSON")
     .action(async (question, options) => {
       const spinner = ora("Calling KB API...").start();
 
@@ -14,11 +15,15 @@ export const askCommand = (program: Command) => {
         const data = await askQuestion(question);
         spinner.succeed("Success");
 
-        console.log("\n Question:", data.question);
-        console.log("Answer  :", data.answer);
+        if (options.json) {
+          console.log(JSON.stringify(data));
+        } else {
+          console.log("\n Question:", data.question);
+          console.log("Answer  :", data.answer);
 
-        if (options.verbose) {
-          console.log("\n Full response:", JSON.stringify(data, null, 2));
+          if (options.verbose) {
+            console.log("\n Full response:", JSON.stringify(data, null, 2));
+          }
         }
       } catch (error: any) {
         spinner.fail("API Error");

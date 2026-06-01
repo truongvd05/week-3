@@ -46,7 +46,13 @@ npm run dev ask "What is TypeScript?"
 With verbose output:
 
 ```bash
-npm run dev ask "What is TypeScript?" --verbose
+npm run dev -- ask "What is TypeScript?" --verbose
+```
+
+With JSON output:
+
+```bash
+npm run dev ask "What is TypeScript?" --json
 ```
 
 ---

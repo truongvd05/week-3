@@ -16,6 +16,9 @@ export const askQuestion = async (question: string): Promise<KBResponse> => {
 
   try {
     const res = await api.get(`/posts/${postId}`);
+    if (!res.data?.title) {
+      throw new Error("Invalid API response: missing title field");
+    }
     return {
       question,
       answer: res.data.title,
