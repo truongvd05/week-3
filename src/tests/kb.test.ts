@@ -55,4 +55,15 @@ describe("KB Service - askQuestion", () => {
 
     await expect(askQuestion("bad question")).rejects.toThrow("404");
   });
+  it("should throw error when title is missing", async () => {
+    mockGet.mockResolvedValue({
+      data: {},
+    });
+
+    await expect(
+      askQuestion("hello")
+    ).rejects.toThrow(
+      "Invalid API response: missing title field"
+    );
+  });
 });

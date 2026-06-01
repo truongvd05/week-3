@@ -80,4 +80,33 @@ describe("ask command", () => {
     JSON.stringify(mockData, null, 2)
   );
 });
+  it("should handle API error", async () => {
+    vi.mocked(askQuestion).mockRejectedValue(
+    new Error("API failed")
+  );
+
+  const errorSpy = vi
+  .spyOn(console, "error")
+  .mockImplementation(() => {});
+
+  const exitSpy = vi
+    .spyOn(process, "exit")
+    .mockImplementation((() => {
+    throw new Error("process.exit");
+  }) as any);
+
+  const program = new Command();
+  askCommand(program);
+
+  await expect(
+    program.parseAsync(["node", "cli", "ask", "test?"])
+  ).rejects.toThrow("process.exit");
+
+  expect(errorSpy).toHaveBeenCalledWith(
+    "Detail:",
+    "API failed"
+  );
+
+  exitSpy.mockRestore();
+  });
 });
